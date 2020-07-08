@@ -1,0 +1,40 @@
+ALGORITHM checpoint datastructure
+VAR
+    i : INTEGER;
+    j : INTEGER;
+    t1 : ARRAY_OF INTEGER[50];
+    t2 : ARRAY_OF INTEGER[50];
+    sum : INTEGER := 0;
+    check : BOOLEAN := TRUE;
+BEGIN
+
+//insert from user
+    Read(t1);
+    Read(t2);
+// iteration t1
+        FOR i FROM 0 TO t1.length-1 STEP 1  DO
+            FOR j FROM 0 TO t2.length-1 STEP 1 DO
+                IF (t1[i]=t2[j]) THEN
+                check:=FALSE
+                BREAK;
+                END_IF
+            END_FOR
+            IF (check=TRUE) THEN
+                sum:=sum+t1[i];
+            END_IF    
+        END_FOR
+// iteration t2
+        FOR i FROM 0 TO t2.length-1 STEP 1  DO
+            FOR j FROM 0 TO t1.length-1 STEP 1 DO
+                IF (t2[i]=t1[j]) THEN
+                check:=FALSE
+                BREAK;
+                END_IF
+            END_FOR
+            IF (check=TRUE) THEN
+                sum:=sum+t2[i];
+            END_IF
+        END_FOR
+// Resultat
+        Write(sum);
+END

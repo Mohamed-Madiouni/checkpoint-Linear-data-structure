@@ -1,0 +1,58 @@
+ALGORITHM checpoint datastructure
+VAR
+    i : INTEGER;
+    j : INTEGER;
+    t1 : ARRAY_OF INTEGER[50];
+    t2 : ARRAY_OF INTEGER[50];
+    count: INTEGER;
+    sum : INTEGER := 0;
+    htab1 : HASH_TABLE<INTEGER,INTEGER>
+    htab2 : HASH_TABLE<INTEGER,INTEGER>
+BEGIN
+
+//insert from user
+    Read(t1);
+    Read(t2);
+// init htab1
+        FOR i FROM 0 TO t1.length-1 STEP 1  DO
+            htab1.insert(t1[i],1) ;
+        END_FOR
+// init htab2
+        FOR i FROM 0 TO t2.length-1 STEP 1  DO
+            htab2.insert(t2[i],1) ;
+        END_FOR
+// iteration htab1
+        FOR i FROM 0 TO t1.length-1 STEP 1  DO
+        FOR j FROM 0 TO t2.length-1 STEP 1  DO
+            IF (t1[i]=t2[j]) THEN
+            count:=htab1.get(t1[i]);
+            htab1.insert(t1[i],count+1);
+            END_IF
+        END_FOR
+        END_FOR
+// iteration htab2
+        FOR i FROM 0 TO t2.length-1 STEP 1  DO
+        FOR j FROM 0 TO t1.length-1 STEP 1  DO
+            IF (t2[i]=t1[j]) THEN
+            count:=htab2.get(t2[i]);
+            htab2.insert(t2[i],count+1);
+            END_IF
+        END_FOR
+        END_FOR
+
+//RESULTAT
+
+        FOR i FROM 0 TO t1.length-1 STEP 1  DO
+        IF (htab1.get(t1[i])=1) THEN
+            sum:=sum+t1[i];
+        END_IF
+        END_FOR
+
+        FOR i FROM 0 TO t2.length-1 STEP 1  DO
+        IF (htab2.get(t2[i])=1) THEN
+            sum:=sum+t2[i];
+        END_IF
+        END_FOR
+
+        Write(sum);
+END
